@@ -277,7 +277,7 @@ namespace Repository.Service
                     Receiver receiver = new Receiver();
                     var messageBody = receiver.receiverMessage();
                     user = messageBody;
-                    using (MailMessage mailMessage = new MailMessage("dikole.shubh@gmail.com", Email))
+                    using (MailMessage mailMessage = new MailMessage("", Email))
                     {
                         mailMessage.Subject = mailSubject;
                         mailMessage.Body = user;
@@ -286,7 +286,7 @@ namespace Repository.Service
                         Smtp.Host = "smtp.gmail.com";
                         Smtp.EnableSsl = true;
                         Smtp.UseDefaultCredentials = false;
-                        Smtp.Credentials = new NetworkCredential("dikole.shubh@gmail.com", "Golem@411041");
+                        Smtp.Credentials = new NetworkCredential("", "");
                         Smtp.Port = 587;
                         Smtp.Send(mailMessage);
                     }
