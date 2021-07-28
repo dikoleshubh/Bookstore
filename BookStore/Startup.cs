@@ -48,10 +48,21 @@ namespace BookStore
           
 
 
+
             services.AddScoped<IUserBL, UserBL>();
             services.AddScoped<IUserRL, UserRL>();
-           //  services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            //var key = Encoding.UTF8.GetBytes(Configuration["Key"]);
+
+
+            services.AddScoped<IBookRL, BookRL>();
+            services.AddScoped<IBookBL, BookBL>();
+
+
+            services.AddScoped<ICartRL, CartRL>();
+            services.AddScoped<ICartBL, CartBL>();
+
+
+            //  services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            // var key = Encoding.UTF8.GetBytes(Configuration["Key"]);
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {

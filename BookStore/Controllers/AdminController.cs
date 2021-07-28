@@ -51,14 +51,39 @@ namespace BookStore.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPost("ADminlogin")]
-        public IActionResult LoginAdmin(LoginAdmin emailModel)
+             [HttpPost("AdminLogin")]
+        public IActionResult Login(LoginAdmin login)                                        //Here return type represents the result of an action method
         {
-            var token = this.adminBL.LoginAdmin(emailModel.AdminEmail, emailModel.AdminPassword);
-            if (token == null)
-                return Unauthorized();
-            return this.Ok(new { token = token, success = true, message = "Token Generated Successfull" });
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    string result = this.adminBL.AdminLogin(login);                   //getting the data from BusinessLayer
+                    if (result != null)
+                    {
+                        return this.Ok(new { Success = true, Message = "Login Successfully", data = result });   //(smd format)    //this.Ok returns the data in json format
+                    }
+                    else
+                    {
+                        return this.BadRequest(new { Success = false, Message = "Login  Unsuccessfully" });
+                    }
+                }
+
+                else
+                {
+                    throw new Exception("Model is not valid");
+                }
+
+            }
+
+
+            catch (Exception e)
+            {
+                return this.BadRequest(new { Success = false, Message = e.Message });
+            }
         }
+
     }
 }
+
